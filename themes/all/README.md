@@ -21,6 +21,25 @@ import * as themes from '@uiw/codemirror-themes-all';
 
 ## Usage
 
+```js
+import { EditorView } from '@codemirror/view';
+import { EditorState } from '@codemirror/state';
+import { javascript } from '@codemirror/lang-javascript';
+import { abcdef } from '@uiw/codemirror-themes-all';
+
+const state = EditorState.create({
+  doc: 'my source code',
+  extensions: [abcdef, javascript({ jsx: true })],
+});
+
+const view = new EditorView({
+  parent: document.querySelector('#editor'),
+  state,
+});
+```
+
+Using in React:
+
 ```jsx
 import CodeMirror from '@uiw/react-codemirror';
 import { abcdef } from '@uiw/codemirror-themes-all';
@@ -40,23 +59,6 @@ function App() {
   );
 }
 export default App;
-```
-
-```js
-import { EditorView } from '@codemirror/view';
-import { EditorState } from '@codemirror/state';
-import { javascript } from '@codemirror/lang-javascript';
-import { abcdef } from '@uiw/codemirror-themes-all';
-
-const state = EditorState.create({
-  doc: 'my source code',
-  extensions: [abcdef, javascript({ jsx: true })],
-});
-
-const view = new EditorView({
-  parent: document.querySelector('#editor'),
-  state,
-});
 ```
 
 ## API
@@ -156,6 +158,16 @@ export * from '@uiw/codemirror-theme-xcode';
 
 <a href="https://uiwjs.github.io/react-codemirror/#/theme/data/bespin">
   <img width="436" alt="codemirror-theme-bespin" src="https://user-images.githubusercontent.com/1680273/176573408-0fd54981-471a-4ef8-91d4-8ad4b159c1e0.png">
+</a>
+
+### console
+
+<a href="https://uiwjs.github.io/react-codemirror/#/theme/data/console/light">
+  <img width="436" alt="codemirror-theme-console light" src="https://github.com/uiwjs/react-codemirror/assets/1680273/e45284f3-97bf-4ddc-8796-319db788df6d">
+</a>
+
+<a href="https://uiwjs.github.io/react-codemirror/#/theme/data/console/dark">
+  <img width="436" alt="codemirror-theme-console dark" src="https://github.com/uiwjs/react-codemirror/assets/1680273/25bae31d-1428-481a-bc04-7c3b49ae38c0">
 </a>
 
 ### copilot
