@@ -580,11 +580,22 @@ export const routes: MenuRouteObject[] = [
           },
           {
             path: 'data/vscode/dark',
-            label: 'VS Code',
+            label: 'VS Code Dark',
             element: (
               <Preview
                 themePkg="@uiw/codemirror-theme-vscode"
                 mode="dark"
+                path={() => import('@uiw/codemirror-theme-vscode/README.md')}
+              />
+            ),
+          },
+          {
+            path: 'data/vscode/light',
+            label: 'VS Code Light',
+            element: (
+              <Preview
+                themePkg="@uiw/codemirror-theme-vscode"
+                mode="light"
                 path={() => import('@uiw/codemirror-theme-vscode/README.md')}
               />
             ),
@@ -648,9 +659,24 @@ export const routes: MenuRouteObject[] = [
             lazy: () => import('./pages/examples/Example431'),
           },
           {
+            path: '650',
+            label: 'How To Disable Copy Paste in Editor?',
+            lazy: () => import('./pages/examples/Example650'),
+          },
+          {
+            path: '674',
+            label: 'Browser spell checking',
+            lazy: () => import('./pages/examples/Example674'),
+          },
+          {
             path: '455',
             label: 'CodeMirrorMerge use theme',
             lazy: () => import('./pages/examples/Example455'),
+          },
+          {
+            path: '681',
+            label: 'CodeMirrorMerge Update Extensions',
+            lazy: () => import('./pages/examples/Example681'),
           },
           {
             path: 'refs',

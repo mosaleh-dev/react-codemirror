@@ -1,6 +1,6 @@
 {
   "name": "react-codemirror-merge",
-  "version": "4.22.1",
+  "version": "4.23.10",
   "description": "CodeMirror merge view for React.",
   "homepage": "https://uiwjs.github.io/react-codemirror",
   "funding": "https://jaywcjlove.github.io/#/sponsor",
@@ -8,6 +8,13 @@
   "license": "MIT",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
+  "exports": {
+    ".": {
+      "require": "./cjs/index.js",
+      "import": "./esm/index.js"
+    },
+    "./*": "./*"
+  },
   "scripts": {
     "watch": "tsbb watch src/*.tsx --use-babel",
     "build": "tsbb build src/*.tsx --use-babel",
@@ -36,7 +43,7 @@
   "dependencies": {
     "@babel/runtime": "^7.18.6",
     "@codemirror/merge": "^6.1.2",
-    "@uiw/react-codemirror": "4.22.1"
+    "@uiw/react-codemirror": "4.23.10"
   },
   "keywords": [
     "react",

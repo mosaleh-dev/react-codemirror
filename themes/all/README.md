@@ -328,6 +328,10 @@ export * from '@uiw/codemirror-theme-xcode';
   <img width="436" alt="codemirror-theme-vscode dark" src="https://user-images.githubusercontent.com/1680273/202690670-385808e2-6346-4e36-a3d6-6d9fc1f216dc.png">
 </a>
 
+<a href="https://uiwjs.github.io/react-codemirror/#/theme/data/vscode/light">
+  <img width="436" alt="codemirror-theme-vscode light" src="https://github.com/uiwjs/react-codemirror/assets/1680273/e22d099e-7e88-4711-bb07-7330047adfe1">
+</a>
+
 ### white
 
 <a href="https://uiwjs.github.io/react-codemirror/#/theme/data/white/dark">
@@ -345,7 +349,7 @@ export * from '@uiw/codemirror-theme-xcode';
 </a>
 
 <a href="https://uiwjs.github.io/react-codemirror/#/theme/data/xcode/light">
-  <img width="436" alt="codemirror-theme-xcode light" src="https://user-images.githubusercontent.com/1680273/206087526-9613a546-f129-4e01-9263-5a75f3f039a7.png">
+  <img width="436" alt="codemirror-theme-xcode light" src="https://github.com/uiwjs/react-codemirror/assets/1680273/81b870f6-36b9-46ee-9ded-1650ba8eebc8">
 </a>
 
 ## Contributors

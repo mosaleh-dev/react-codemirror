@@ -4,7 +4,7 @@ import { getDefaultExtensions } from '@uiw/react-codemirror';
 import { MergeView, MergeConfig, DirectMergeConfig } from '@codemirror/merge';
 import { useStore } from './store';
 import { CodeMirrorMergeProps } from './';
-
+import { EditorView, ViewUpdate } from '@codemirror/view';
 export interface InternalRef {
   container?: HTMLDivElement | null;
   view?: MergeView;
@@ -24,12 +24,21 @@ export const Internal = React.forwardRef<InternalRef, CodeMirrorMergeProps>((pro
     collapseUnchanged,
     destroyRerender = true,
     renderRevertControl,
+    diffConfig,
     ...elmProps
   } = props;
   const { modified, modifiedExtension, original, originalExtension, theme, dispatch, ...otherStore } = useStore();
   const editor = useRef<HTMLDivElement>(null);
   const view = useRef<MergeView>();
-  const opts = { orientation, revertControls, highlightChanges, gutter, collapseUnchanged, renderRevertControl };
+  const opts = {
+    orientation,
+    revertControls,
+    highlightChanges,
+    gutter,
+    collapseUnchanged,
+    renderRevertControl,
+    diffConfig,
+  };
 
   useImperativeHandle(
     ref,
@@ -48,14 +57,31 @@ export const Internal = React.forwardRef<InternalRef, CodeMirrorMergeProps>((pro
     [editor, view, modified, original, opts],
   );
 
+  const originalUpdateListener = EditorView.updateListener.of((vu: ViewUpdate) => {
+    if (vu.docChanged && typeof originalExtension?.onChange === 'function') {
+      const doc = vu.state.doc;
+      const val = doc.toString();
+      originalExtension?.onChange(val, vu);
+    }
+  });
+
+  const modifiedUpdateListener = EditorView.updateListener.of((vu: ViewUpdate) => {
+    if (vu.docChanged && typeof modifiedExtension?.onChange === 'function') {
+      const doc = vu.state.doc;
+      const val = doc.toString();
+      modifiedExtension?.onChange(val, vu);
+    }
+  });
+
   useEffect(() => {
-    if (!view.current && editor.current) {
+    if (!view.current && editor.current && originalExtension && modifiedExtension) {
       view.current = new MergeView({
         a: {
           ...original,
           extensions: [
             ...(originalExtension?.extension || []),
             ...getDefaultExtensions({ ...originalExtension?.option, theme }),
+            originalUpdateListener,
           ],
         },
         b: {
@@ -63,13 +89,15 @@ export const Internal = React.forwardRef<InternalRef, CodeMirrorMergeProps>((pro
           extensions: [
             ...(modifiedExtension?.extension || []),
             ...getDefaultExtensions({ ...modifiedExtension?.option, theme }),
+            modifiedUpdateListener,
           ],
         },
         parent: editor.current,
         ...opts,
       });
+      dispatch!({ view: view.current });
     }
-  }, [view, editor]);
+  }, [view, editor, originalExtension, modifiedExtension]);
 
   useEffect(() => {
     if (original && original.doc && view.current) {
